@@ -1,27 +1,642 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin cá nhân</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Nguyễn Hoàng Trọng Phúc - Web Developer Portfolio</title>
+    <meta name="description" content="Portfolio cá nhân của Nguyễn Hoàng Trọng Phúc - Lập trình viên Web năng động tại TP. Hồ Chí Minh. Chuyên về Tailwind CSS, JavaScript và Web Applications.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#ecfeff',
+                            100: '#cffafe',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                        },
+                        accent: {
+                            400: '#a855f7',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(6, 182, 212, 0.4)' },
+                            '100%': { boxShadow: '0 0 30px rgba(139, 92, 246, 0.7)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .bg-glass {
+                background: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+            }
+            .border-glass {
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-500;
+            }
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="profile-card">
-            <div class="header">
-                <h1>THÔNG TIN CÁ NHÂN CỦA TÔI</h1>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Background Decoration Grid & Glows -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-[128px]"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px]"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-blue-600/15 rounded-full blur-[128px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-30"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-glass border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    P
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg text-slate-100 group-hover:text-cyan-400 transition-colors">TrongPhuc</span>
+                    <span class="text-xs text-slate-400">Web Developer</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors">Giới thiệu</a>
+                <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition-colors">Kỹ năng</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Dự án nổi bật</a>
+                <a href="#contact" class="text-slate-300 hover:text-cyan-400 transition-colors">Liên hệ</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://github.com/TrongPhuc1711" target="_blank" rel="noopener noreferrer" 
+                   class="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 rounded-xl transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-github text-lg"></i> GitHub
+                </a>
+                <a href="#contact" 
+                   class="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all">
+                    Liên hệ ngay
+                </a>
             </div>
-            <div class="profile-content">
-                <img src="IMG_3564.JPG" alt="Profile Picture" class="profile-img">
-                <h2>Nguyễn Hoàng Trọng Phúc</h2>
-                <p class="student-info"><strong>Ngày sinh: </strong>17/11/2004</p>
-                <p class="student-info"><strong>Địa chỉ: </strong>A4/38 Ấp 2 Xã Bình Hưng, Thành phố Hồ Chí Minh </p>
-                <p class="student-info"><strong>Facebook:</strong> <a href="https://www.facebook.com/Trphuc1711">Phuc Nguyen</a></p>
-                <p class="student-info"><strong>Số điện thoại và Zalo: </strong>0377819348</p>
-                <p class="student-info"><strong>Email: </strong>phucnguyen171104@gmail.com</p>
+
+            <!-- Mobile Hamburger Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-6 py-4 space-y-3">
+            <a href="#about" class="block text-slate-300 hover:text-cyan-400 py-1">Giới thiệu</a>
+            <a href="#skills" class="block text-slate-300 hover:text-cyan-400 py-1">Kỹ năng</a>
+            <a href="#projects" class="block text-slate-300 hover:text-cyan-400 py-1">Dự án nổi bật</a>
+            <a href="#contact" class="block text-slate-300 hover:text-cyan-400 py-1">Liên hệ</a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                <a href="https://github.com/TrongPhuc1711" target="_blank" class="w-full text-center py-2 bg-slate-800 text-slate-200 rounded-lg">GitHub</a>
+                <a href="#contact" class="w-full text-center py-2 bg-cyan-500 text-white font-semibold rounded-lg">Liên hệ</a>
             </div>
         </div>
-    </div>
+    </header>
+
+    <main class="flex-grow z-10">
+
+        <!-- HERO SECTION -->
+        <section id="about" class="relative py-16 lg:py-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Content Column -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <!-- Status Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wide backdrop-blur-sm">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span>Lập trình viên Web Front-End</span>
+                        </div>
+
+                        <!-- Main Heading -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
+                            Xin chào, tôi là <br class="hidden sm:inline" />
+                            <span class="text-gradient">Nguyễn Hoàng Trọng Phúc</span>
+                        </h1>
+
+                        <!-- Bio Description -->
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Tôi phát triển các ứng dụng Web hiện đại, tối ưu giao diện trải nghiệm người dùng (UI/UX) sắc nét, responsive mượt mà với <strong>Tailwind CSS</strong>, JavaScript và các công nghệ web mới nhất.
+                        </p>
+
+                        <!-- Personal Info Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-sm text-slate-300">
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <div class="w-9 h-9 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Ngày sinh</div>
+                                    <div class="font-medium text-slate-200">17/11/2004</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <div class="w-9 h-9 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Địa chỉ</div>
+                                    <div class="font-medium text-slate-200 truncate" title="Bình Hưng, Thành phố Hồ Chí Minh">Bình Hưng, TP. Hồ Chí Minh</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Điện thoại & Zalo</div>
+                                    <a href="tel:0377819348" class="font-medium text-slate-200 hover:text-cyan-400 transition-colors">0377 819 348</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <div class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Email</div>
+                                    <a href="mailto:phucnguyen171104@gmail.com" class="font-medium text-slate-200 hover:text-cyan-400 transition-colors truncate block max-w-[170px]" title="phucnguyen171104@gmail.com">phucnguyen171104@...</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Action Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#projects" 
+                               class="px-7 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-xl shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-rocket"></i> Khám phá Dự án
+                            </a>
+                            <a href="https://www.facebook.com/Trphuc1711" target="_blank" rel="noopener noreferrer" 
+                               class="px-6 py-3.5 text-base font-semibold text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-xl hover:border-cyan-500/50 transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-facebook text-blue-500 text-lg"></i> Kết nối Facebook
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Avatar Card Column -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative group">
+                            <!-- Outer Glow Effect -->
+                            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-500 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-500 group-hover:scale-105"></div>
+                            
+                            <!-- Main Avatar Card Container -->
+                            <div class="relative bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col items-center shadow-2xl backdrop-blur-xl">
+                                <div class="relative mb-6">
+                                    <!-- Avatar Ring -->
+                                    <div class="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-sky-500 to-purple-600 shadow-inner">
+                                        <img src="IMG_3564.JPG" 
+                                             alt="Nguyễn Hoàng Trọng Phúc" 
+                                             class="w-full h-full object-cover rounded-full border-4 border-slate-900 group-hover:scale-105 transition duration-500"
+                                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop';">
+                                    </div>
+                                    <!-- Online Status Ring Badge -->
+                                    <div class="absolute bottom-2 right-2 bg-emerald-500 text-slate-950 p-2 rounded-full border-4 border-slate-900 shadow-lg" title="Sẵn sàng làm việc">
+                                        <i class="fa-solid fa-check text-xs font-black"></i>
+                                    </div>
+                                </div>
+
+                                <h2 class="text-2xl font-bold text-white text-center">Nguyễn Hoàng Trọng Phúc</h2>
+                                <p class="text-cyan-400 font-medium text-sm mt-1">@Trphuc1711</p>
+                                
+                                <div class="w-full border-t border-slate-800 my-5"></div>
+
+                                <!-- Quick Social Links -->
+                                <div class="flex items-center justify-center gap-4">
+                                    <a href="https://www.facebook.com/Trphuc1711" target="_blank" title="Facebook"
+                                       class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 text-lg hover:-translate-y-1">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://zalo.me/0377819348" target="_blank" title="Zalo"
+                                       class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-blue-500 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 font-bold text-xs hover:-translate-y-1">
+                                        ZALO
+                                    </a>
+                                    <a href="mailto:phucnguyen171104@gmail.com" title="Email"
+                                       class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-red-500 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 text-lg hover:-translate-y-1">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </a>
+                                    <a href="https://github.com/TrongPhuc1711" target="_blank" title="GitHub"
+                                       class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 text-lg hover:-translate-y-1">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS HIGHLIGHT -->
+        <section class="py-8 bg-slate-900/40 border-y border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400">2+</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Dự án Web hoàn thiện</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-purple-400">100%</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Tailwind CSS Responsive</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400">Vercel</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Deploy Cloud Server</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-amber-400">GitHub</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Actions CI/CD Deploy</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-xs font-extrabold text-cyan-400 uppercase tracking-widest mb-2">Năng Lực Chuyên Môn</h2>
+                    <p class="text-3xl sm:text-4xl font-bold text-white">Kỹ năng & Công nghệ phát triển</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Skill Card 1: Tailwind CSS -->
+                    <div class="p-6 bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-css3-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Tailwind CSS & Styling</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Thiết kế giao diện hiện đại, tối ưu responsive chuẩn pixel, glassmorphic UI và animation mượt mà trên mọi màn hình.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md bg-cyan-950/80 text-cyan-300 text-xs font-semibold border border-cyan-800/50">Tailwind CSS</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Flexbox & Grid</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Dark Mode</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 2: Modern JavaScript -->
+                    <div class="p-6 bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-js"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">JavaScript & Frontend</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Xử lý logic tương tác người dùng, asynchronous API requests, DOM manipulation mượt mà và cấu trúc mã nguồn sạch.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md bg-amber-950/80 text-amber-300 text-xs font-semibold border border-amber-800/50">ES6+ JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Fetch API / JSON</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Single Page Apps</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 3: Web App Architecture & Deployment -->
+                    <div class="p-6 bg-slate-900/70 border border-slate-800 hover:border-purple-500/50 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Deploy & Version Control</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Triển khai dự án lên nền tảng Vercel, cài đặt GitHub Pages với GitHub Actions CI/CD tự động hóa quy trình phát triển.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-md bg-purple-950/80 text-purple-300 text-xs font-semibold border border-purple-800/50">GitHub Actions</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Vercel Deploy</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium">Git Versioning</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PROJECTS SECTION -->
+        <section id="projects" class="py-20 bg-slate-900/50 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-xs font-extrabold text-cyan-400 uppercase tracking-widest mb-2">Sản Phẩm Đã Thực Hiện</h2>
+                    <p class="text-3xl sm:text-4xl font-bold text-white">Dự án Web Nổi Bật</p>
+                    <p class="text-slate-400 text-sm mt-3">Các sản phẩm web thực tế đã được xây dựng, thiết kế và đưa vào hoạt động công khai.</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                    <!-- PROJECT 1: VIBETOK -->
+                    <div class="group bg-slate-900 border border-slate-800 hover:border-cyan-500/60 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/10 flex flex-col">
+                        <!-- Image Container with Overlay -->
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="images/vibe-tok.jpg" 
+                                 alt="VibeTok Project Preview" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                            
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-cyan-400 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Video Platform
+                                </span>
+                            </div>
+
+                            <div class="absolute top-4 right-4">
+                                <a href="https://vibe-tok.vercel.app/" target="_blank" rel="noopener noreferrer" 
+                                   class="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-cyan-500 text-slate-200 hover:text-slate-950 flex items-center justify-center transition-colors shadow-lg"
+                                   title="Xem Demo Trực Tiếp">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card Body Content -->
+                        <div class="p-8 flex-grow flex flex-col justify-between space-y-6">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+                                        VibeTok - Video Streaming App
+                                    </h3>
+                                </div>
+                                <p class="text-slate-300 text-sm leading-relaxed">
+                                    Ứng dụng xem video ngắn dạng lướt phong cách TikTok & YouTube Shorts. Tích hợp giao diện Dark Neon sôi động, tối ưu hóa giao diện đa thiết bị, trình phát video và danh mục nhạc vibe đa dạng.
+                                </p>
+                            </div>
+
+                            <!-- Tech Stack Badges -->
+                            <div class="space-y-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-lg bg-cyan-950/70 border border-cyan-800/60 text-cyan-300 text-xs font-semibold">Tailwind CSS</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">JavaScript</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Vercel Cloud</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">UI/UX Layout</span>
+                                </div>
+
+                                <div class="pt-2">
+                                    <a href="https://vibe-tok.vercel.app/" target="_blank" rel="noopener noreferrer" 
+                                       class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 group/btn transition-all">
+                                        <span>Truy cập Website: vibe-tok.vercel.app</span>
+                                        <i class="fa-solid fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 2: P-COFFEE -->
+                    <div class="group bg-slate-900 border border-slate-800 hover:border-amber-500/60 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col">
+                        <!-- Image Container with Overlay -->
+                        <div class="relative overflow-hidden aspect-video">
+                            <img src="images/p-coffee.jpg" 
+                                 alt="P-Coffee Project Preview" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                            
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-amber-400 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> E-Commerce & Cafe
+                                </span>
+                            </div>
+
+                            <div class="absolute top-4 right-4">
+                                <a href="https://p-coffee.vercel.app/" target="_blank" rel="noopener noreferrer" 
+                                   class="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-amber-500 text-slate-200 hover:text-slate-950 flex items-center justify-center transition-colors shadow-lg"
+                                   title="Xem Demo Trực Tiếp">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card Body Content -->
+                        <div class="p-8 flex-grow flex flex-col justify-between space-y-6">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">
+                                        P-Coffee - Modern Coffee Shop
+                                    </h3>
+                                </div>
+                                <p class="text-slate-300 text-sm leading-relaxed">
+                                    Nền tảng đặt thương hiệu cà phê trực tuyến cao cấp. Giao diện Espresso Dark sang trọng, cho phép xem danh mục đồ uống, hạt cà phê tuyển chọn, quản lý giỏ hàng trực quan và trải nghiệm mượt mà.
+                                </p>
+                            </div>
+
+                            <!-- Tech Stack Badges -->
+                            <div class="space-y-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-lg bg-amber-950/70 border border-amber-800/60 text-amber-300 text-xs font-semibold">Tailwind CSS</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">JavaScript</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">Vercel Cloud</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-medium">E-Commerce UX</span>
+                                </div>
+
+                                <div class="pt-2">
+                                    <a href="https://p-coffee.vercel.app/" target="_blank" rel="noopener noreferrer" 
+                                       class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white font-semibold text-sm shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group/btn transition-all">
+                                        <span>Truy cập Website: p-coffee.vercel.app</span>
+                                        <i class="fa-solid fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-xs font-extrabold text-cyan-400 uppercase tracking-widest mb-2">Kết Nối Với Tôi</h2>
+                    <p class="text-3xl sm:text-4xl font-bold text-white">Liên Hệ & Hợp Tác</p>
+                    <p class="text-slate-400 text-sm mt-3">Bạn có ý tưởng dự án hoặc cơ hội công việc? Đừng ngần ngại liên hệ ngay với tôi.</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    
+                    <!-- Left Contact Info Cards -->
+                    <div class="lg:col-span-5 space-y-4">
+                        
+                        <a href="https://zalo.me/0377819348" target="_blank" 
+                           class="p-6 bg-slate-900 border border-slate-800 hover:border-cyan-500/60 rounded-2xl flex items-center gap-5 group transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Số Điện Thoại & Zalo</div>
+                                <div class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">0377 819 348</div>
+                                <div class="text-xs text-cyan-400/80 mt-0.5">Nhắn tin Zalo trực tiếp &rarr;</div>
+                            </div>
+                        </a>
+
+                        <a href="mailto:phucnguyen171104@gmail.com" 
+                           class="p-6 bg-slate-900 border border-slate-800 hover:border-purple-500/60 rounded-2xl flex items-center gap-5 group transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Hòm Thư Email</div>
+                                <div class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">phucnguyen171104@gmail.com</div>
+                                <div class="text-xs text-purple-400/80 mt-0.5">Gửi email trao đổi &rarr;</div>
+                            </div>
+                        </a>
+
+                        <a href="https://www.facebook.com/Trphuc1711" target="_blank" 
+                           class="p-6 bg-slate-900 border border-slate-800 hover:border-blue-500/60 rounded-2xl flex items-center gap-5 group transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-facebook"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Trang Facebook Cá Nhân</div>
+                                <div class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Phuc Nguyen (@Trphuc1711)</div>
+                                <div class="text-xs text-blue-400/80 mt-0.5">Ghé thăm trang Facebook &rarr;</div>
+                            </div>
+                        </a>
+
+                        <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Địa Chỉ Sinh Sống</div>
+                                <div class="text-sm font-medium text-slate-200 mt-0.5">A4/38 Ấp 2, Xã Bình Hưng, TP. Hồ Chí Minh</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Quick Message Form -->
+                    <div class="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-xl">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-cyan-400"></i> Gửi Tin Nhắn Nhanh
+                        </h3>
+
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="name" class="block text-xs font-semibold text-slate-300 uppercase mb-2">Họ và Tên</label>
+                                    <input type="text" id="name" required placeholder="Nguyễn Văn A" 
+                                           class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-500 transition-colors text-sm">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-xs font-semibold text-slate-300 uppercase mb-2">Email Liên Hệ</label>
+                                    <input type="email" id="email" required placeholder="your.name@example.com" 
+                                           class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-500 transition-colors text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-xs font-semibold text-slate-300 uppercase mb-2">Chủ Đề</label>
+                                <input type="text" id="subject" required placeholder="Hợp tác dự án Web / Đề xuất công việc" 
+                                       class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-500 transition-colors text-sm">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-semibold text-slate-300 uppercase mb-2">Nội Dung Tin Nhắn</label>
+                                <textarea id="message" rows="4" required placeholder="Viết tin nhắn của bạn ở đây..." 
+                                          class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-500 transition-colors text-sm resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" 
+                                    class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Gửi Tin Nhắn
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-8 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-white text-sm">P</span>
+                <span class="font-bold text-slate-200 text-sm">Nguyễn Hoàng Trọng Phúc</span>
+            </div>
+
+            <div class="text-xs text-slate-400 text-center">
+                © 2026 Nguyễn Hoàng Trọng Phúc. Built with <span class="text-cyan-400 font-semibold">Tailwind CSS</span> & Deployed via <span class="text-purple-400 font-semibold">GitHub Pages</span>.
+            </div>
+
+            <div class="flex items-center gap-4 text-slate-400 text-base">
+                <a href="https://github.com/TrongPhuc1711" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.facebook.com/Trphuc1711" target="_blank" class="hover:text-blue-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                <a href="mailto:phucnguyen171104@gmail.com" class="hover:text-red-400 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast Modal Script -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Cảm ơn ${name}! Tin nhắn của bạn đã được gửi thành công. Phúc sẽ phản hồi lại sớm nhất có thể!`);
+            document.getElementById('contact-form').reset();
+        }
+    </script>
 </body>
 </html>
